@@ -1,0 +1,4 @@
+# (sid):(dc):(wan_ip):(host_name):(lan_ip):(role1,role2):(value):
+#
+# Server in Dallas, Texas`
+XEN-953:DFW:172.17.0.2:servermattic:172.17.0.2:fluentd-base:0:
