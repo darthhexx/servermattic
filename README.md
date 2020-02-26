@@ -1,6 +1,6 @@
 ## Servermattic
 
-A server deploy system using roles, tags, and symliks to make both deploying and updating as simple as can be.
+A server deploy system using migration scripts, tags, and symliks to make both deploying and updating as simple as can be.
 
 ## Step 1:
 - Fork this Github repository which will serve as the source for your config management system.
@@ -11,10 +11,10 @@ A server deploy system using roles, tags, and symliks to make both deploying and
 This git repo is going to have lots of potentially sensitive data in it, so it should not be public for production systems. You may also want to consider restricting based on IP, as it shouldn't need to be accessible from the public world, but just from the servers you are deploying to.
 
 ## Step 2:
-Edit your servers.dat file to fill in the appropriate information. See the included file for the expected format.
+Edit the servers.dat file and fill in the appropriate information fro your server(s). See the included file for the expected format.
 
 ## Step 3:
-Add some stuff in your /tags/base/0001 directory.  This will mirror the filesystem via symlinks. /tags/base/0001/etc/aliases will get symlinked to /etc/aliases on the deployed host.  The only required file is etc/roles/{rolename} and the contents of this file should be the revision of the role without the leading zeros.
+Add some stuff in your /tags/base/0001 directory and they will be mirrored the filesystem via symlinks when you deploy or freshen the role. e.g. /tags/base/0001/etc/aliases will get symlinked to /etc/aliases on the deployed host.  The only required file is etc/roles/{rolename} and the contents of this file should be the tag revision of the role, without the leading zeros.
 
 ## Step 4:
 If you wish to run any commands as part of applying your base role, add those to /migrations/base/0001.sh Common things to put in here would be apt-get install apache2 if you want to install apache2 from apt.
@@ -22,7 +22,8 @@ If you wish to run any commands as part of applying your base role, add those to
 ## Step 5:
 Run the deploy.sh script on the host you wish to deploy to.  This will install the necessary support scripts and the base role
 
-To apply additional roles first create them in git and then run role.sh apply {rolename}.  This is also how you upgrade to a new tag of an existing role.
+## Step 6:
+To apply additional roles first create them in git and then run /root/bin/role.sh apply {rolename}.  This is also how you upgrade to a new tag of an existing role.
 
 ## Extras:
 There is a docker build file in the docker-build directory that can be used to test out your server deploys. You would need to set the servers.dat fields, specifically the IP address, for it to function as expected of course.
