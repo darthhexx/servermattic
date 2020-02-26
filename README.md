@@ -1,3 +1,7 @@
+## Servermattic
+
+A server deploy system using roles, tags, and symliks to make both deploying and updating as simple as can be.
+
 ## Step 1:
 - Fork this Github repository which will serve as the source for your config management system.
 - Clone the repository on your computer.
@@ -24,11 +28,16 @@ To apply additional roles first create them in git and then run role.sh apply {r
 There is a docker build file in the docker-build directory that can be used to test out your server deploys. You would need to set the servers.dat fields, specifically the IP address, for it to function as expected of course.
 
 Debian Buster image that can then be built with:
-`> docker build -t <your-image-tag> .`
+```
+> docker build -t <your-image-tag> .
+```
+
 And then run these to launch and deploy:
-`> docker run --name servermattic -h servermattic -v <your-local-servermattic-directory>:/root -d <your-image-tag>`
-`> docker exec -it servermattic /bin/bash`
-`> /root/bin/deploy.sh`
+```
+> docker run --name servermattic -h servermattic -v <your-local-servermattic-directory>:/root -d <your-image-tag>
+> docker exec -it servermattic /bin/bash
+> /root/bin/deploy.sh
+```
 
 ## Design Suggestions:
 * If you have multiple datacenters, create a role for each datacenter which has DC-specific stuff if applicable (dc-sat, dc-iad, dc-lax, etc)
@@ -36,12 +45,12 @@ And then run these to launch and deploy:
 * If you have files which you change frequently which require service restarts/reloads to apply, we would suggest using monit (http://www.tildeslash.com/monit/) for this.  Just check the md5sum of the config file and if it changes, have monit restart/reload the service.
 * There isn't really a way to remove a role, but all the files are self-contained so it shouldnt be that hard.  Or just re-install the OS :)
 
-# Request:
+## Request:
 If you actually use this code to do something cool, could you let us know about it?  barry 'at' automattic 'dot' com
 
-# Credit:
+## Credit:
 Most of the code contributed by Demitrious Kelly (http://apokalyptik.com).  Remaining tidbits by Barry Abrahamson (http://barry.wordpress.com).
 
-# Caveats:
+## Caveats:
 * Some of the current code relies on apt but could be easily adapted to use any package manager or something else entirely.
 * Although you can retrofit production hosts to use this system, we would suggest you test it on a clean install first.
