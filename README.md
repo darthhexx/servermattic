@@ -11,7 +11,7 @@ A server deploy system using migration scripts, tags, and symliks to make both d
 This git repo is going to have lots of potentially sensitive data in it, so it should not be public for production systems. You may also want to consider restricting based on IP, as it shouldn't need to be accessible from the public world, but just from the servers you are deploying to.
 
 ## Step 2:
-Edit the servers.dat file and fill in the appropriate information fro your server(s). See the included file for the expected format.
+Edit the servers.dat file and fill in the appropriate information for your server(s). See the included file for the expected format.
 
 ## Step 3:
 Add some stuff in your /tags/base/0001 directory and they will be mirrored the filesystem via symlinks when you deploy or freshen the role. e.g. /tags/base/0001/etc/aliases will get symlinked to /etc/aliases on the deployed host.  The only required file is etc/roles/{rolename} and the contents of this file should be the tag revision of the role, without the leading zeros.
